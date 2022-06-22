@@ -1,8 +1,16 @@
 <?php
+  $search_string = $_GET["search"] ?? null;
+
   $pdo = new PDO("mysql:host=localhost;port=3306;dbname=products_list_app", "siddiq", "test1234");
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $statement = $pdo->prepare("SELECT * FROM products ORDER BY created_at DESC");
+
+  if($search_string){
+    $statement = $pdo->prepare("SELECT * FROM products WHERE title LIKE :search");
+    $statement->bindValue(":search", "%$search_string%"); 
+    // it's a wildcard search for the search string in the title column of the products table and returns all rows that match the search string in the title column of the products table. T
+  }
   $statement->execute();
   $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -33,6 +41,12 @@
       <?php if(empty($products)): ?>
         <p>No products to show. Please Add some products...</p>
       <?php else: ?>
+        <form action="<?= $_SERVER["PHP_SELF"] ?>" method="GET">
+          <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Search for products..." aria-label="search for products...">
+            <button class="input-group-text">Search</button>
+          </div>
+        </form>
         <table class="table">
           <thead>
             <tr>
