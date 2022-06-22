@@ -43,7 +43,7 @@
       <?php else: ?>
         <form action="<?= $_SERVER["PHP_SELF"] ?>" method="GET">
           <div class="input-group mb-3">
-            <input type="text" name="search" class="form-control" placeholder="Search for products..." aria-label="search for products...">
+            <input type="text" name="search" value="<?= $search_string ?>" class="form-control" placeholder="Search for products..." aria-label="search for products...">
             <button class="input-group-text">Search</button>
           </div>
         </form>
