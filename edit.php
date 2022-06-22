@@ -38,6 +38,7 @@
       $image_path = $image;
       // checking if image is also uploaded...
       if(!empty($updated_image['full_path'])){
+        unlink($image_path);
         $image_tmp_name = $updated_image['tmp_name'];
         $image_ext = pathinfo($updated_image['name'], PATHINFO_EXTENSION);
         $image_path = "uploads/products/product_$id.$image_ext";
