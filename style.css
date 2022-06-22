@@ -1,0 +1,23 @@
+img{
+  display: block;
+  max-width: 100%;
+}
+
+.product__thumbnail{
+  width: 60px;
+}
+
+table td{
+  vertical-align: middle;
+}
+
+.action-form{
+  display: inline-flex;
+  gap: 0.75rem;
+}
+
+.product-image{
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+}
