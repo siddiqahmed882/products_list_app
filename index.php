@@ -1,8 +1,7 @@
 <?php
   $search_string = $_GET["search"] ?? null;
 
-  $pdo = new PDO("mysql:host=localhost;port=3306;dbname=products_list_app", "siddiq", "test1234");
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  require_once('config/db.php');
 
   $statement = $pdo->prepare("SELECT * FROM products ORDER BY created_at DESC");
 
@@ -15,19 +14,7 @@
   $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./style.css">
-  <title>Product List App</title>
-</head>
-
-<body>
+<?php include_once('partials/header.php') ?>
   <header>
     <div class="container">
       <h1>Products List</h1>
@@ -80,6 +67,4 @@
       <?php endif ?>
     </div>
   </main>
-</body>
-
-</html>
+<?php include_once('partials/footer.php') ?>
